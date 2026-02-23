@@ -1,0 +1,20 @@
+.heroGlow {
+  position: absolute;
+  inset: -12% -8% -8% -8%;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate3d(0,0,0);
+  transition: transform 300ms cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+  mix-blend-mode: screen;
+  filter: blur(44px) saturate(140%);
+  background:
+    radial-gradient(60% 40% at 50% 30%, rgba(124,58,237,0.4), transparent 30%),
+    radial-gradient(40% 30% at 80% 70%, rgba(90,45,160,0.18), transparent 30%);
+  opacity: 1;
+  border-radius: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroGlow { transition: none; transform: none !important; }
+}
