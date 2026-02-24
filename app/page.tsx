@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion, Variants } from "framer-motion";
 import styles from "./page.module.css";
 import GlowParallax from "../components/GlowParallax";
 
@@ -73,7 +73,7 @@ const systemsNodes: Node[] = [
 const reveal = {
   hidden: { opacity: 0, y: 12 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 0.9, 0.2, 1] } },
-};
+} as Variants;
 
 const container = {
   hidden: {},
