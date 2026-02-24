@@ -154,7 +154,9 @@ export default function Page() {
   const [activeNodeId, setActiveNodeId] = useState<string>(systemsNodes[0].id);
   const [hoveredNodeId, setHoveredNodeId] = useState<string>("");
   const [ringPulse, setRingPulse] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const reduceMotion = useReducedMotion();
+  
 
   const activeNode = useMemo(
     () => systemsNodes.find((n) => n.id === activeNodeId) ?? systemsNodes[0],
@@ -172,6 +174,24 @@ export default function Page() {
     const t = setTimeout(() => setRingPulse(false), 680);
     return () => clearTimeout(t);
   }, [activeNodeId, reduceMotion]);
+
+  // detect mobile viewport to adjust interaction and svg scaling
+  useEffect(() => {
+    const mq = typeof window !== "undefined" ? window.matchMedia("(max-width: 640px)") : null;
+    const update = () => {
+      if (!mq) return;
+      setIsMobile(!!mq.matches);
+    };
+    update();
+    if (mq && mq.addEventListener) mq.addEventListener("change", update);
+    else if (mq && mq.addListener) mq.addListener(update as any);
+    return () => {
+      if (mq && mq.removeEventListener) mq.removeEventListener("change", update);
+      else if (mq && mq.removeListener) mq.removeListener(update as any);
+    };
+  }, []);
+
+  
 
   return (
     <div className={styles.page}>
@@ -236,7 +256,7 @@ export default function Page() {
                 data-hovered={hoveredNodeId}
                 data-active={activeNodeId}
               >
-                <svg className={styles.mapSvg} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+                <svg className={styles.mapSvg} viewBox="0 0 100 100" preserveAspectRatio={isMobile ? "xMidYMid meet" : "none"} aria-hidden>
                   <circle cx="50" cy="50" r="34" className={styles.ring} />
                   {systemsNodes.map((node) => (
                     <line
@@ -262,8 +282,19 @@ export default function Page() {
                     className={`${styles.node} ${activeNodeId === node.id ? styles.activeNode : ""}`}
                     style={{ left: `${node.x}%`, top: `${node.y}%` }}
                     onClick={() => {
-                      setActiveNodeId(node.id);
-                      window.open(`https://${node.subdomain}.${process.env.NEXT_PUBLIC_ROOT_PORTFOLIO_URL}`, "_blank");
+                      const url = `https://${node.subdomain}.${process.env.NEXT_PUBLIC_ROOT_PORTFOLIO_URL}`;
+                      if (isMobile) {
+                        // on mobile: first tap selects (shows details), second tap on same node opens link
+                        if (activeNodeId === node.id) {
+                          window.open(url, "_blank");
+                        } else {
+                          setActiveNodeId(node.id);
+                        }
+                      } else {
+                        // desktop: immediate open (preserve current behavior)
+                        setActiveNodeId(node.id);
+                        window.open(url, "_blank");
+                      }
                     }}
                     onMouseEnter={() => setHoveredNodeId(node.id)}
                     onFocus={() => setActiveNodeId(node.id)}

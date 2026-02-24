@@ -94,6 +94,7 @@
 
 .heroSubtitle {
   margin: 0;
+  margin-top: 50px;
   color: var(--muted);
   font-size: clamp(14px, 2.2vw, 18px);
   max-width: 68ch;
