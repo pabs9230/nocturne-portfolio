@@ -15,11 +15,15 @@ type Node = {
   y: number;
 };
 
-const systemsNodes: Node[] = [
+type Language = "en" | "es";
+
+const languageStorageKey = "nocturne-language";
+
+const systemsNodesEn: Node[] = [
   {
     id: "fintech",
     subdomain: "fintech",
-    label: "Fintech",
+    label: "Fintech (W.I.P.)",
     summary: "Ledgers, payments, idempotent flows, and risk-aware messaging.",
     focus: [
       "Event-driven ledgers with outbox/idempotency",
@@ -32,7 +36,7 @@ const systemsNodes: Node[] = [
   {
     id: "economy",
     subdomain: "data",
-    label: "Economy Data",
+    label: "Economy Data (W.I.P.)",
     summary: "Pipelines for ingestion, modeling, and visualization APIs.",
     focus: [
       "Time-series storage + snapshotting",
@@ -45,11 +49,14 @@ const systemsNodes: Node[] = [
   {
     id: "game",
     subdomain: "game",
-    label: "Game Engine",
-    summary: "Projection-driven state, event dispatch, and snapshots.",
+    label: "Living Dead Beat",
+    summary: "PvE/PvP RPG multiplayer online IO style videogame.",
     focus: [
-      "Authoritative server with projection engine",
-      "Replayable event log + snapshots",
+      "Art on canvas with in-memory projections",
+      "Playable core with basic mechanics and bots",
+      "Role-based creep design",
+      "Donation system with real money transactions via Paypal(W.I.P.)",
+      "Replayable event log",
       "Latency-aware emit/observe loop",
     ],
     x: 86,
@@ -58,12 +65,70 @@ const systemsNodes: Node[] = [
   {
     id: "lab",
     subdomain: "lab",
-    label: "Tech Lab",
+    label: "Tech Lab (W.I.P.)",
     summary: "Load testing, distributed sims, and observability stacks.",
     focus: [
       "Scenario generators for stress tests",
       "Caching experiments with trace probes",
       "Red-team drills and chaos switches",
+    ],
+    x: 50,
+    y: 88,
+  },
+];
+
+const systemsNodesEs: Node[] = [
+  {
+    id: "fintech",
+    subdomain: "fintech",
+    label: "Fintech (W.I.P.)",
+    summary: "Ledgers, pagos, flujos idempotentes y mensajeria orientada a riesgo.",
+    focus: [
+      "Ledgers event-driven con outbox/idempotencia",
+      "Orquestacion de pagos con retries y DLQ",
+      "Routing API gateway/BFF y politica de auth",
+    ],
+    x: 50,
+    y: 12,
+  },
+  {
+    id: "economy",
+    subdomain: "data",
+    label: "Economia Data (W.I.P.)",
+    summary: "Pipelines para ingesta, modelado y APIs de visualizacion.",
+    focus: [
+      "Almacenamiento time-series + snapshotting",
+      "Workers de modelado con backpressure",
+      "Capa de servicio con guardrails de consulta",
+    ],
+    x: 14,
+    y: 50,
+  },
+  {
+    id: "game",
+    subdomain: "game",
+    label: "Motor de Juego",
+    summary: "Estado por proyecciones, dispatch de eventos y snapshots.",
+    focus: [
+      "Arte sobre canvas con proyecciones en memoria",
+      "Core jugable con mecanicas basicas y bots",
+      "Diseño de creeps basado en roles",
+      "Sistema de donaciones con transacciones de dinero real via Paypal(W.I.P.)",
+      "Log de eventos reproducible",
+      "Loop de emit/observe consciente de latencia",
+    ],
+    x: 86,
+    y: 50,
+  },
+  {
+    id: "lab",
+    subdomain: "lab",
+    label: "Tech Lab (W.I.P.)",
+    summary: "Pruebas de carga, simulaciones distribuidas y observabilidad.",
+    focus: [
+      "Generadores de escenarios para stress tests",
+      "Experimentos de cache con probes de trazas",
+      "Ejercicios red-team y chaos switches",
     ],
     x: 50,
     y: 88,
@@ -80,87 +145,231 @@ const container = {
   visible: { transition: { staggerChildren: 0.06 } },
 };
 
-const philosophy = [
-  {
-    title: "Systems over pages",
-    body: "Treat the portfolio as a living system—maps, flows, and resilience baked into the experience.",
+const homeContent = {
+  en: {
+    heroSubtitle: "Systems engineer portfolio - hybrid tech & art, maps, and resilient systems.",
+    kicker: "NOCTURNE · Pablo Marines · Systems Engineer",
+    lede:
+      "NOCTURNE is a hybrid tech/art interface with a dark aurora, interactive tech-map, and concise engineering signals. Built to promote my services and showcase my own personal projects, it's designed to surface my development philosophy and expertise in web/app/game development, data engineering and system design.",
+    heroExplore: "Explore systems map",
+    heroContact: "Contact / socials",
+    metaChips: ["Web/App Development", "Game Development", "Data Engineering", "Marketing", "Resilient Systems", "Business Digitalization"],
+    languageToggleAria: "Switch portfolio language",
+    mapEyebrow: "My products map.",
+    mapTitle: "NOCTURNE core with connected domains",
+    mapLead:
+      "Central node with Fintech, Economy Data, Game Engine, and Tech Lab edges.",
+    mapRingLabel: "Shared infra-ring",
+    focusedNode: "Focused node",
+    enterLabel: "Enter",
+    philosophyEyebrow: "Core philosophy",
+    philosophyTitle: "How the experience is framed",
+    philosophy: [
+      {
+        title: "Systems over pages",
+        body: "Treat the portfolio as a living system - maps, flows, and resilience baked into the experience.",
+      },
+      {
+        title: "Hybrid tech/art",
+        body: "Dark canvas with expressive nodes and restrained motion; clarity first, mood second.",
+      },
+      {
+        title: "Signal-rich storytelling",
+        body: "Mini case systems and engineering principles surface credibility without walls of text.",
+      },
+    ],
+    servicesEyebrow: "Landing page services",
+    servicesTitle: "Conversion-first landing page packages for growth-focused teams",
+    servicesLead:
+      "Before jumping into system demos, you can review service packages designed for businesses that need results, including remote and nearshore delivery plus selected on-site work in Cancun and Quintana Roo.",
+    servicesBody:
+      "Explore Starter, Pro, and Growth scopes with clear deliverables, timelines, and add-ons for lead capture and automation.",
+    servicesPreviewTags: [
+      "Senior freelance developer",
+      "Accessible landing pages",
+      "Nearshore + remote delivery",
+      "On-site Cancun, Mexico",
+    ],
+    viewPackages: "View packages",
+    quickQuote: "WhatsApp quick quote",
+    principlesEyebrow: "Programming principles",
+    principlesTitle: "My approach to system design and programming.",
+    principles: [
+      "Focus on product outcomes and architecture",
+      "Readable code and clever code as necessary",
+      "Small iterations with visible progress",
+      "Test and verify before shipping",
+      "Use AI to augment the developer, never as autopilot"
+    ],
+    techEyebrow: "Tech stack",
+    techTitle: "Tools and disciplines",
+    techStack: [
+      {
+        title: "Frontend",
+        items: ["Next.js (App Router)", "TypeScript", "React", "CSS Modules"],
+      },
+      {
+        title: "Backend",
+        items: ["FastAPI/Flask", "Node.js", "Message Queues", "WebSockets", "GraphQL"],
+      },
+      {
+        title: "Data & Infra",
+        items: [
+          "PostgreSQL/MySQL",
+          "Redis",
+          "Object Storage",
+          "Time-series DB",
+          "Observability stack",
+          "Docker",
+          "Kubernetes",
+        ],
+      },
+      {
+        title: "Practice",
+        items: ["C4 modeling", "Event storming", "Chaos drills", "Load tests", "SLO dashboards"],
+      },
+    ],
+    contactEyebrow: "Contact",
+    contactTitle: "Let's collaborate",
+    contactLead: "Reach out for systems design, simulations, fintech, or data platform work.",
+    contactEmail: "Email",
+    contactLinkedIn: "LinkedIn",
+    contactGitHub: "GitHub",
+    footerMetaOne: "NOCTURNE · Mawgrim · Systems Engineer",
+    footerMetaTwo: "Built with Next.js, App Router, and custom CSS.",
   },
-  {
-    title: "Hybrid tech/art",
-    body: "Dark canvas with expressive nodes and restrained motion; clarity first, mood second.",
+  es: {
+    heroSubtitle: "Portafolio de ingenieria de sistemas - hibrido tech + arte, mapas y sistemas resilientes.",
+    kicker: "NOCTURNE · Pablo Marines · Ingeniero de Sistemas",
+    lede:
+      "NOCTURNE es una interfaz híbrida tech/arte con una aurora oscura, mapa interactivo de tecnologias y señales de ingeniería concisas. Diseñada para promover mis servicios y mostrar mis propios proyectos personales, está diseñada para mostrar mi filosofía de desarrollo y experiencia en desarrollo web/app/juego, ingeniería de datos y diseño de sistemas.",
+    heroExplore: "Explorar mapa de sistemas",
+    heroContact: "Contacto / redes",
+    metaChips: ["Desarrollo de apps y web", "Desarrollo de juegos", "Ingeniería de datos", "Marketing", "Sistemas resilientes", "Digitalización de negocios"],
+    languageToggleAria: "Cambiar idioma del portafolio",
+    mapEyebrow: "Mapa de mis productos.",
+    mapTitle: "Nucleo NOCTURNE con dominios conectados",
+    mapLead:
+      "Nodo central con aristas hacia Fintech, Data de Economia, Motor de Juego y Tech Lab.",
+    mapRingLabel: "Anillo de infraestructura compartida.",
+    focusedNode: "Nodo enfocado",
+    enterLabel: "Entrar",
+    philosophyEyebrow: "Filosofia base",
+    philosophyTitle: "Como esta planteada la experiencia",
+    philosophy: [
+      {
+        title: "Sistemas sobre paginas",
+        body: "Tratar el portafolio como un sistema vivo - mapas, flujos y resiliencia integrados en la experiencia.",
+      },
+      {
+        title: "Hibrido tech/arte",
+        body: "Canvas oscuro con nodos expresivos y movimiento contenido; primero claridad, despues atmosfera.",
+      },
+      {
+        title: "Narrativa de alto valor",
+        body: "Mini casos de sistemas y principios de ingenieria para proyectar credibilidad sin bloques de texto.",
+      },
+    ],
+    servicesEyebrow: "Servicios de landing pages",
+    servicesTitle: "Paquetes conversion-first para equipos orientados a crecimiento",
+    servicesLead:
+      "Antes de entrar a los demos de sistemas, puedes revisar paquetes de servicio para negocios que necesitan resultados, incluyendo trabajo remoto, nearshore y presencial en Cancun y Quintana Roo.",
+    servicesBody:
+      "Explora alcances Starter, Pro y Growth con entregables claros, tiempos definidos y extras para captacion y automatizacion de leads.",
+    servicesPreviewTags: [
+      "Desarrollador freelance senior",
+      "Landing pages accesibles",
+      "Entrega nearshore + remota",
+      "Presencial en Cancun, Mexico",
+    ],
+    viewPackages: "Ver paquetes",
+    quickQuote: "Cotizacion rapida por WhatsApp",
+    principlesEyebrow: "Principios de programacion",
+    principlesTitle: "Mi enfoque al diseñar sistemas y programar.",
+    principles: [
+      "Enfoque en resultados del producto y arquitectura",
+      "Codigo legible e ingenioso dentro de lo necesario",
+      "Iteraciones pequenas con avance visible",
+      "Probar y verificar antes de publicar",
+      "Usar IA para potenciar al desarrollador, nunca como piloto automatico",
+    ],
+    techEyebrow: "Stack tecnologico",
+    techTitle: "Herramientas y disciplinas",
+    techStack: [
+      {
+        title: "Frontend",
+        items: ["Next.js (App Router)", "TypeScript", "React", "CSS Modules"],
+      },
+      {
+        title: "Backend",
+        items: ["FastAPI/Flask", "Node.js", "Message Queues", "WebSockets", "GraphQL"],
+      },
+      {
+        title: "Data e Infra",
+        items: [
+          "PostgreSQL/MySQL",
+          "Redis",
+          "Object Storage",
+          "Time-series DB",
+          "Stack de observabilidad",
+          "Docker",
+          "Kubernetes",
+        ],
+      },
+      {
+        title: "Practica",
+        items: ["Modelado C4", "Event storming", "Chaos drills", "Load tests", "Dashboards SLO"],
+      },
+    ],
+    contactEyebrow: "Contacto",
+    contactTitle: "Colaboremos",
+    contactLead: "Escribeme para arquitectura de sistemas, simulaciones, fintech o plataformas de datos.",
+    contactEmail: "Email",
+    contactLinkedIn: "LinkedIn",
+    contactGitHub: "GitHub",
+    footerMetaOne: "NOCTURNE · Mawgrim · Ingeniero de Sistemas",
+    footerMetaTwo: "Construido con Next.js, App Router y CSS custom.",
   },
-  {
-    title: "Signal-rich storytelling",
-    body: "Mini case systems, C4 cues, and engineering principles surface credibility without walls of text.",
-  },
-];
+} as const;
 
-const ecosystem = [
-  {
-    title: "Fintech Microservices",
-    status: "Live architecture",
-    badges: ["Ledger", "Payments", "Idempotency", "Outbox"],
-    summary: "API gateway, auth, ledger engine, payments processor, and message queue with replayable events.",
-  },
-  {
-    title: "Economy Data Science",
-    status: "Modeling in progress",
-    badges: ["Ingestion", "Modeling", "TSDB", "Viz API"],
-    summary: "Data ingestion, modeling pipelines, time-series DB, and visualization API for macro/micro signals.",
-  },
-  {
-    title: "Game Simulation Engine",
-    status: "Playable core",
-    badges: ["Projections", "Event Store", "Snapshots"],
-    summary: "Authoritative game server with in-memory projections, event dispatch, and snapshot rotation.",
-  },
-  {
-    title: "Tech Lab",
-    status: "Experiments",
-    badges: ["Load Tests", "Distributed Sims", "Observability"],
-    summary: "Load-testing engine, distributed simulation harness, caching experiments, and observability stack.",
-  },
-];
-
-const principles = [
-  "Event-driven first; batch as a fallback",
-  "Design for replay: logs + snapshots",
-  "Idempotency and outbox across boundaries",
-  "Guardrails: timeouts, circuit breakers, backpressure",
-  "Observability as product surface",
-  "Progressive disclosure: show detail on intent",
-];
-
-const techStack = [
-  {
-    title: "Frontend",
-    items: ["Next.js (App Router)", "TypeScript", "React", "CSS Modules"],
-  },
-  {
-    title: "Backend",
-    items: ["FastAPI/Flask", "Node.js", "Message Queues", "WebSockets", "GraphQL"],
-  },
-  {
-    title: "Data & Infra",
-    items: ["PostgreSQL/MySQL", "Redis", "Object Storage", "Time-series DB", "Observability stack", "Docker", "Kubernetes"],
-  },
-  {
-    title: "Practice",
-    items: ["C4 modeling", "Event storming", "Chaos drills", "Load tests", "SLO dashboards"],
-  },
-];
+const quickQuoteUrl =
+  process.env.NEXT_PUBLIC_WHATSAPP_URL ??
+  "https://api.whatsapp.com/send?text=Hello%20Nocturne%2C%20I%20want%20a%20quote%20for%20a%20landing%20page%20project.";
 
 export default function Page() {
-  const [activeNodeId, setActiveNodeId] = useState<string>(systemsNodes[0].id);
+  const [lang, setLang] = useState<Language>("en");
+  const [activeNodeId, setActiveNodeId] = useState<string>(systemsNodesEn[0].id);
   const [hoveredNodeId, setHoveredNodeId] = useState<string>("");
   const [ringPulse, setRingPulse] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const reduceMotion = useReducedMotion();
-  
+
+  const copy = homeContent[lang];
+  const systemsNodes = lang === "es" ? systemsNodesEs : systemsNodesEn;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const saved = window.localStorage.getItem(languageStorageKey);
+    if (saved === "en" || saved === "es") {
+      setLang(saved);
+      return;
+    }
+
+    const preferred = window.navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
+    setLang(preferred);
+  }, []);
+
+  const setLanguage = (nextLanguage: Language) => {
+    setLang(nextLanguage);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(languageStorageKey, nextLanguage);
+    }
+  };
 
   const activeNode = useMemo(
     () => systemsNodes.find((n) => n.id === activeNodeId) ?? systemsNodes[0],
-    [activeNodeId],
+    [activeNodeId, systemsNodes],
   );
 
   const displayedNode = useMemo(() => {
@@ -191,13 +400,65 @@ export default function Page() {
     };
   }, []);
 
+  const openNode = (node: Node) => {
+    const url = `https://${node.subdomain}.${process.env.NEXT_PUBLIC_ROOT_PORTFOLIO_URL}`;
+    setActiveNodeId(node.id);
+    // clear hovered preview when navigating from mobile preview
+    setHoveredNodeId("");
+    if (typeof window !== "undefined") {
+      window.open(url, "_blank");
+    }
+  };
+
   
 
   return (
     <div className={styles.page}>
       <GlowParallax />
       <div className={styles.aurora} aria-hidden />
-      <main className={styles.shell}>
+      <main className={styles.shell} lang={lang === "es" ? "es-MX" : "en"}>
+        <div className={styles.langToggle} role="group" aria-label={copy.languageToggleAria}>
+          <button
+            type="button"
+            className={`${styles.langButton} ${lang === "en" ? styles.langButtonActive : ""}`}
+            onClick={() => setLanguage("en")}
+            aria-pressed={lang === "en"}
+          >
+            <span aria-hidden className={styles.flag}>🇺🇸</span>
+            EN
+          </button>
+          <button
+            type="button"
+            className={`${styles.langButton} ${lang === "es" ? styles.langButtonActive : ""}`}
+            onClick={() => setLanguage("es")}
+            aria-pressed={lang === "es"}
+          >
+            <span aria-hidden className={styles.flag}>🇲🇽</span>
+            ES
+          </button>
+        </div>
+
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={lang}
+            className={styles.languageStage}
+            initial={
+              reduceMotion
+                ? { opacity: 1 }
+                : { opacity: 0, y: 12, scale: 0.996, filter: "blur(7px) saturate(110%)" }
+            }
+            animate={
+              reduceMotion
+                ? { opacity: 1 }
+                : { opacity: 1, y: 0, scale: 1, filter: "blur(0px) saturate(100%)" }
+            }
+            exit={
+              reduceMotion
+                ? { opacity: 1 }
+                : { opacity: 0, y: -10, scale: 1.004, filter: "blur(8px) saturate(112%)" }
+            }
+            transition={{ duration: reduceMotion ? 0.05 : 0.42, ease: [0.22, 0.9, 0.2, 1] }}
+          >
         <section className={styles.hero}>
           <div className={styles.heroCard}>
             <motion.h1
@@ -209,27 +470,23 @@ export default function Page() {
             </motion.h1>
             <div className={styles.hUnderline} aria-hidden />
             <p className={styles.heroSubtitle}>
-              Systems engineer portfolio — hybrid tech & art, maps, and resilient systems.
+              {copy.heroSubtitle}
             </p>
           </div>
-          <div className={styles.kicker}>NOCTURNE · Pablo Marines · Systems Engineer</div>
-          <p className={styles.lede}>
-            Hybrid tech/art interface with a dark aurora, interactive node map, and concise engineering signals. Built
-            to highlight C4 thinking, projections, and event-driven rigor.
-          </p>
+          <div className={styles.kicker}>{copy.kicker}</div>
+          <p className={styles.lede}>{copy.lede}</p>
           <div className={styles.heroActions}>
             <a className={styles.primary} href="#map">
-              Explore systems map
+              {copy.heroExplore}
             </a>
             <a className={styles.secondary} href="#contact">
-              Contact / socials
+              {copy.heroContact}
             </a>
           </div>
           <div className={styles.metaChips}>
-            <span>App Router</span>
-            <span>Event-driven</span>
-            <span>C4 mapping</span>
-            <span>Projections</span>
+            {copy.metaChips.map((chip) => (
+              <span key={chip}>{chip}</span>
+            ))}
           </div>
         </section>
 
@@ -242,12 +499,9 @@ export default function Page() {
           viewport={{ once: true, amount: 0.12 }}
         >
           <div className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>Homepage systems map</p>
-            <h2>NOCTURNE core with connected domains</h2>
-            <p className={styles.sectionLead}>
-              Central node with Fintech, Economy Data, Game Engine, and Tech Lab spokes. Shared infrastructure ring: Redis,
-              Message Queue, Database, Observability.
-            </p>
+            <p className={styles.eyebrow}>{copy.mapEyebrow}</p>
+            <h2>{copy.mapTitle}</h2>
+            <p className={styles.sectionLead}>{copy.mapLead}</p>
           </div>
           <motion.div className={styles.mapGrid} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}>
             <motion.div className={styles.mapCard} variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } }}>
@@ -282,19 +536,17 @@ export default function Page() {
                     className={`${styles.node} ${activeNodeId === node.id ? styles.activeNode : ""}`}
                     style={{ left: `${node.x}%`, top: `${node.y}%` }}
                     onClick={() => {
-                      const url = `https://${node.subdomain}.${process.env.NEXT_PUBLIC_ROOT_PORTFOLIO_URL}`;
+                      // Mobile: single tap should behave like hover/preview (do not open link)
+                      // Desktop: preserve existing behaviour (select + open)
                       if (isMobile) {
-                        // on mobile: first tap selects (shows details), second tap on same node opens link
-                        if (activeNodeId === node.id) {
-                          window.open(url, "_blank");
-                        } else {
-                          setActiveNodeId(node.id);
-                        }
+                        setHoveredNodeId(node.id);
                       } else {
-                        // desktop: immediate open (preserve current behavior)
                         setActiveNodeId(node.id);
-                        window.open(url, "_blank");
+                        openNode(node);
                       }
+                    }}
+                    onTouchStart={() => {
+                      if (isMobile) setHoveredNodeId(node.id);
                     }}
                     onMouseEnter={() => setHoveredNodeId(node.id)}
                     onFocus={() => setActiveNodeId(node.id)}
@@ -303,7 +555,7 @@ export default function Page() {
                     <span>{node.label}</span>
                   </button>
                 ))}
-                <div className={styles.ringLabel}>Shared infra ring · Redis · MQ · DB · Observability</div>
+                <div className={styles.ringLabel}>{copy.mapRingLabel}</div>
               </div>
             </motion.div>
             <motion.div className={styles.mapDetail} variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } }}>
@@ -315,7 +567,7 @@ export default function Page() {
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.36 }}
                 >
-                  <p className={styles.detailKicker}>Focused node</p>
+                  <p className={styles.detailKicker}>{copy.focusedNode}</p>
                   <h3>{displayedNode.label}</h3>
                   <p className={styles.detailText}>{displayedNode.summary}</p>
                   <ul className={styles.focusList}>
@@ -323,6 +575,17 @@ export default function Page() {
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
+                  {isMobile && (
+                    <div className={styles.enterWrap}>
+                      <button
+                        className={styles.enterButton}
+                        onClick={() => openNode(displayedNode)}
+                        aria-label={`${copy.enterLabel} ${displayedNode.label}`}
+                      >
+                        {copy.enterLabel}
+                      </button>
+                    </div>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </motion.div>
@@ -338,11 +601,11 @@ export default function Page() {
           viewport={{ once: false, amount: 0.12 }}
         >
           <div className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>Core philosophy</p>
-            <h2>How the experience is framed</h2>
+            <p className={styles.eyebrow}>{copy.philosophyEyebrow}</p>
+            <h2>{copy.philosophyTitle}</h2>
           </div>
           <motion.div className={styles.cardGrid} variants={container}>
-            {philosophy.map((item) => (
+            {copy.philosophy.map((item) => (
               <motion.article key={item.title} className={styles.card} variants={reveal}>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
@@ -352,34 +615,34 @@ export default function Page() {
         </motion.section>
 
         <motion.section
-          className={styles.ecosystem}
-          id="ecosystem"
+          className={styles.servicesPreview}
+          id="services-preview"
           variants={reveal}
           initial={reduceMotion ? undefined : "hidden"}
           whileInView={reduceMotion ? undefined : "visible"}
           viewport={{ once: false, amount: 0.12 }}
         >
           <div className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>Project ecosystem</p>
-            <h2>Mini case systems across four domains</h2>
-            <p className={styles.sectionLead}>Each tile is CTA-ready for demos, repos, or deep dives.</p>
+            <p className={styles.eyebrow}>{copy.servicesEyebrow}</p>
+            <h2>{copy.servicesTitle}</h2>
+            <p className={styles.sectionLead}>{copy.servicesLead}</p>
           </div>
-          <motion.div className={styles.cardGrid} variants={container}>
-            {ecosystem.map((item) => (
-              <motion.article key={item.title} className={styles.card} variants={reveal}>
-                <div className={styles.cardTop}>
-                  <p className={styles.eyebrow}>{item.status}</p>
-                  <h3>{item.title}</h3>
-                  <p>{item.summary}</p>
-                </div>
-                <div className={styles.badges}>
-                  {item.badges.map((badge) => (
-                    <span key={badge}>{badge}</span>
-                  ))}
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
+          <motion.article className={styles.servicesPreviewCard} variants={reveal}>
+            <p className={styles.sectionLead}>{copy.servicesBody}</p>
+            <div className={styles.metaChips}>
+              {copy.servicesPreviewTags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+            <div className={styles.heroActions}>
+              <a className={styles.primary} href="/services">
+                {copy.viewPackages}
+              </a>
+              <a className={styles.secondary} href={quickQuoteUrl} target="_blank" rel="noreferrer">
+                {copy.quickQuote}
+              </a>
+            </div>
+          </motion.article>
         </motion.section>
 
         <motion.section
@@ -391,11 +654,11 @@ export default function Page() {
           viewport={{ once: false, amount: 0.12 }}
         >
           <div className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>Engineering principles</p>
-            <h2>Guardrails and practice</h2>
+            <p className={styles.eyebrow}>{copy.principlesEyebrow}</p>
+            <h2>{copy.principlesTitle}</h2>
           </div>
           <motion.ul className={styles.principleList} variants={container}>
-            {principles.map((item) => (
+            {copy.principles.map((item) => (
               <motion.li key={item} variants={reveal}>
                 <span className={styles.bullet} />
                 <p>{item}</p>
@@ -413,11 +676,11 @@ export default function Page() {
           viewport={{ once: false, amount: 0.12 }}
         >
           <div className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>Tech stack</p>
-            <h2>Tools and disciplines</h2>
+            <p className={styles.eyebrow}>{copy.techEyebrow}</p>
+            <h2>{copy.techTitle}</h2>
           </div>
           <motion.div className={styles.stackGrid} variants={container}>
-            {techStack.map((group) => (
+            {copy.techStack.map((group) => (
               <motion.article key={group.title} className={styles.stackCard} variants={reveal}>
                 <h3>{group.title}</h3>
                 <ul>
@@ -439,28 +702,28 @@ export default function Page() {
           viewport={{ once: false, amount: 0.12 }}
         >
           <div>
-            <p className={styles.eyebrow}>Contact</p>
-            <h2>Let&apos;s collaborate</h2>
-            <p className={styles.sectionLead}>
-              Reach out for systems design, simulations, fintech, or data platform work.
-            </p>
+            <p className={styles.eyebrow}>{copy.contactEyebrow}</p>
+            <h2>{copy.contactTitle}</h2>
+            <p className={styles.sectionLead}>{copy.contactLead}</p>
             <div className={styles.heroActions}>
               <a className={styles.primary} href="https://mail.google.com/mail/?view=cm&fs=1&to=pabs9230@gmail.com" target="_blank" rel="noreferrer">
-                Email
+                {copy.contactEmail}
               </a>
               <a className={styles.secondary} href="https://www.linkedin.com/in/pablo-marines-lechuga/" target="_blank" rel="noreferrer">
-                LinkedIn
+                {copy.contactLinkedIn}
               </a>
               <a className={styles.secondary} href="https://github.com/pabs9230" target="_blank" rel="noreferrer">
-                GitHub
+                {copy.contactGitHub}
               </a>
             </div>
           </div>
           <div className={styles.footerMeta}>
-            <p>NOCTURNE · Mawgrim · Systems Engineer</p>
-            <p>Built with Next.js, App Router, and custom CSS.</p>
+            <p>{copy.footerMetaOne}</p>
+            <p>{copy.footerMetaTwo}</p>
           </div>
         </motion.footer>
+          </motion.div>
+        </AnimatePresence>
       </main>
     </div>
   );

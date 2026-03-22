@@ -1,0 +1,429 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg) 0%, #000000 62%);
+  color: var(--text);
+}
+
+.aurora {
+  position: fixed;
+  inset: -10% -10% -5% -10%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.18;
+  filter: blur(44px) saturate(110%);
+  background:
+    radial-gradient(40% 35% at 25% 30%, rgba(137, 92, 255, 0.1) 0%, rgba(8, 4, 15, 0) 70%),
+    radial-gradient(45% 40% at 70% 25%, rgba(75, 215, 255, 0.08) 0%, rgba(5, 3, 10, 0) 70%),
+    radial-gradient(55% 45% at 60% 65%, rgba(180, 77, 255, 0.07) 0%, rgba(4, 2, 8, 0) 80%),
+    linear-gradient(115deg, rgba(120, 63, 255, 0.08), rgba(20, 10, 40, 0.06), rgba(90, 180, 255, 0.06));
+  animation: auroraShift 42s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+.shell {
+  position: relative;
+  z-index: 2;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 78px 24px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+.langToggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(8, 5, 16, 0.66);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+}
+
+.langButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.langButton:hover {
+  transform: translateY(-1px);
+}
+
+.langButtonActive {
+  border-color: rgba(180, 140, 255, 0.85);
+  box-shadow: var(--glow);
+  background: rgba(124, 77, 255, 0.2);
+  animation: buttonPulse 1.8s ease-in-out infinite;
+}
+
+.flag {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.languageStage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  isolation: isolate;
+}
+
+.languageStage::before {
+  content: "";
+  position: absolute;
+  inset: -4% -3%;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 24px;
+  background:
+    radial-gradient(42% 30% at 24% 22%, rgba(186, 113, 255, 0.14), rgba(186, 113, 255, 0) 70%),
+    radial-gradient(34% 28% at 74% 18%, rgba(76, 206, 255, 0.12), rgba(76, 206, 255, 0) 72%),
+    radial-gradient(48% 38% at 50% 86%, rgba(124, 77, 255, 0.12), rgba(124, 77, 255, 0) 75%);
+  filter: blur(12px);
+  opacity: 0;
+  animation: mysticSweep 460ms ease-out 1;
+}
+
+.hero {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 5vw, 44px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.heroTitle {
+  font-size: clamp(34px, 5vw, 64px);
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  max-width: 18ch;
+}
+
+.heroLead {
+  max-width: 78ch;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.primary {
+  background: linear-gradient(130deg, var(--accent-2), var(--accent));
+  color: #0b0814;
+  border-color: transparent;
+  box-shadow: var(--glow);
+}
+
+.secondary {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+}
+
+.primary:hover,
+.secondary:hover {
+  transform: translateY(-2px);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sectionTitle {
+  font-size: clamp(25px, 3.6vw, 40px);
+  letter-spacing: -0.02em;
+}
+
+.sectionLead {
+  max-width: 78ch;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.packagesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.packageCard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0));
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featured {
+  border-color: rgba(180, 140, 255, 0.75);
+  box-shadow: 0 0 38px rgba(124, 77, 255, 0.18);
+}
+
+.packageName {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.price {
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.timeline {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.packageSummary {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 4px 0 8px;
+}
+
+.packageList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.packageList li {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.extrasGrid,
+.modesGrid,
+.faqList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.extraCard,
+.modeCard,
+.faqItem,
+.ctaCard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0));
+  box-shadow: var(--shadow);
+}
+
+.extraCard h3,
+.modeCard h3,
+.faqItem h3 {
+  margin-bottom: 8px;
+}
+
+.extraPrice {
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.extraCard ul,
+.faqItem p,
+.modeCard p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.extraCard ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tagCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.tagCloud span {
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 11px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.ctaCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ctaTitle {
+  font-size: clamp(24px, 3.4vw, 38px);
+  letter-spacing: -0.02em;
+}
+
+.ctaCard p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.footerLine {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@keyframes auroraShift {
+  0% {
+    transform: translate3d(-1%, 0, 0) scale(1.01);
+    opacity: 0.16;
+  }
+  50% {
+    transform: translate3d(1%, 0.5%, 0) scale(1.015);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate3d(-0.5%, -0.5%, 0) scale(1.01);
+    opacity: 0.16;
+  }
+}
+
+@keyframes mysticSweep {
+  0% {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  35% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+}
+
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(124, 77, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(124, 77, 255, 0.42);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(124, 77, 255, 0.2);
+  }
+}
+
+@media (max-width: 640px) {
+  .langToggle {
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+  }
+
+  .langButton {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
+  .shell {
+    padding: 62px 18px 88px;
+    gap: 56px;
+  }
+
+  .heroActions {
+    width: 100%;
+  }
+
+  .primary,
+  .secondary {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora,
+  .languageStage::before,
+  .langButtonActive,
+  .primary,
+  .secondary {
+    animation: none;
+    transition: none;
+  }
+}

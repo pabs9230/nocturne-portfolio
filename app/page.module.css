@@ -45,6 +45,78 @@
   gap: 96px;
 }
 
+.langToggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(8, 5, 16, 0.66);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+}
+
+.langButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.langButton:hover {
+  transform: translateY(-1px);
+}
+
+.langButtonActive {
+  border-color: rgba(180, 140, 255, 0.85);
+  box-shadow: var(--glow);
+  background: rgba(124, 77, 255, 0.2);
+  animation: buttonPulse 1.8s ease-in-out infinite;
+}
+
+.flag {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.languageStage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+  isolation: isolate;
+}
+
+.languageStage::before {
+  content: "";
+  position: absolute;
+  inset: -4% -3%;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 24px;
+  background:
+    radial-gradient(42% 30% at 24% 22%, rgba(186, 113, 255, 0.14), rgba(186, 113, 255, 0) 70%),
+    radial-gradient(34% 28% at 74% 18%, rgba(76, 206, 255, 0.12), rgba(76, 206, 255, 0) 72%),
+    radial-gradient(48% 38% at 50% 86%, rgba(124, 77, 255, 0.12), rgba(124, 77, 255, 0) 75%);
+  filter: blur(12px);
+  opacity: 0;
+  animation: mysticSweep 460ms ease-out 1;
+}
+
 /* full-page glow is provided by components/GlowParallax */
 
 .hero {
@@ -249,6 +321,25 @@
   stroke-width: 0.55;
 }
 
+/* connector visual states referenced from JS */
+.connectorActive {
+  stroke: rgba(196, 125, 255, 0.9);
+  stroke-width: 0.9;
+  filter: drop-shadow(0 4px 8px rgba(124,58,237,0.18));
+}
+
+.connectorActiveActive {
+  stroke: rgba(124, 58, 237, 1);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 6px 18px rgba(124,58,237,0.28));
+}
+
+/* ring pulse applied to the canvas when active */
+.ringPulseActive {
+  box-shadow: 0 0 40px rgba(124,58,237,0.12) inset;
+  transition: box-shadow 360ms ease;
+}
+
 .coreNode {
   position: absolute;
   top: 50%;
@@ -276,6 +367,7 @@
   -webkit-text-stroke: 0.6px rgba(0,0,0,0.6);
   /* Bright core with neon gradients clipped to text for inner glow */
   background: linear-gradient(180deg, #ffffff 0%, #e7e0ff 30%, #c49bff 60%, #8b4bff 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: saturate(140%) contrast(110%);
@@ -366,6 +458,8 @@
   box-shadow: var(--glow);
 }
 
+/* touch-friendly node sizing on small screens */
+
 .activeNode {
   background: rgba(124, 77, 255, 0.16);
   border-color: rgba(180, 140, 255, 0.9);
@@ -415,12 +509,24 @@
 }
 
 .philosophy,
+.servicesPreview,
 .ecosystem,
 .principles,
 .tech {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.servicesPreviewCard {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .cardGrid {
@@ -529,6 +635,32 @@
   }
 }
 
+@keyframes mysticSweep {
+  0% {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  35% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+}
+
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(124, 77, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(124, 77, 255, 0.42);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(124, 77, 255, 0.2);
+  }
+}
+
 @media (max-width: 960px) {
   .mapGrid {
     grid-template-columns: 1fr;
@@ -540,8 +672,24 @@
 }
 
 @media (max-width: 640px) {
+  .langToggle {
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+  }
+
+  .langButton {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
   .shell {
     padding: 60px 18px 90px;
+    gap: 72px;
+  }
+
+  .languageStage {
     gap: 72px;
   }
 
@@ -560,6 +708,16 @@
     height: 100px;
   }
 
+  .node {
+    padding: 8px 10px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  .mapCanvas {
+    min-height: 380px;
+  }
+
   .ringLabel {
     font-size: 11px;
   }
@@ -572,6 +730,30 @@
   /* reduce heavy effects on small screens */
   .heroTitle::after { display: none; }
   .heroTitle { animation: none; filter: saturate(120%) contrast(105%); }
+}
+
+/* Enter button shown in mobile detail pane */
+.enterWrap {
+  margin-top: 12px;
+}
+
+.enterButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(130deg, var(--accent-2), var(--accent));
+  color: #0b0814;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--glow);
+}
+
+.enterButton:active {
+  transform: translateY(1px);
 }
 
 .main {
@@ -608,6 +790,11 @@
 @media (prefers-reduced-motion: reduce) {
   .aurora {
     animation: none;
+  }
+  .languageStage::before,
+  .langButtonActive {
+    animation: none;
+    transition: none;
   }
   .heroTitle,
   .heroTitle::after {
