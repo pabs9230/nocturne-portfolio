@@ -344,7 +344,16 @@ export default function Page() {
   const reduceMotion = useReducedMotion();
 
   const copy = homeContent[lang];
-  const systemsNodes = lang === "es" ? systemsNodesEs : systemsNodesEn;
+  const baseSystemsNodes = lang === "es" ? systemsNodesEs : systemsNodesEn;
+  const systemsNodes = useMemo(() => {
+    if (!isMobile) return baseSystemsNodes;
+    return baseSystemsNodes.map((node) => ({
+      ...node,
+      // Keep nodes away from hard edges on small screens to avoid subtle horizontal overflow.
+      x: Math.min(84, Math.max(16, node.x)),
+      y: Math.min(86, Math.max(14, node.y)),
+    }));
+  }, [baseSystemsNodes, isMobile]);
   const quickQuoteUrl = useMemo(() => {
     const body =
       lang === "es"
@@ -565,8 +574,8 @@ export default function Page() {
                     <span>{node.label}</span>
                   </button>
                 ))}
-                <div className={styles.ringLabel}>{copy.mapRingLabel}</div>
               </div>
+              <div className={styles.ringLabel}>{copy.mapRingLabel}</div>
             </motion.div>
             <motion.div className={styles.mapDetail} variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } }}>
               <AnimatePresence mode="wait">
