@@ -129,6 +129,7 @@ const content: Record<Language, LocalizedContent> = {
         "Advanced forms",
         "Automation workflows with interface",
         "PayPal payment systems",
+        "Data analysis and custom visualization",
       ],
       investment: "Estimated investment: Projects starting at $1200 USD",
       costNote:
@@ -337,15 +338,16 @@ const content: Record<Language, LocalizedContent> = {
       lead:
         "Además de landing pages, también desarrollo tecnologia tanto ligera como robusta para negocios que necesitan organizar mejor procesos, capturar datos o automatizar operaciones.",
       capabilities: [
-        "Mini CRMs",
+        "CRMs",
         "Dashboards",
         "Portales internos",
         "Reservas",
         "Formularios avanzados",
         "Automatización con interfaz",
         "Sistemas de pagos con PayPal",
+        "Analisis de datos y visualización personalizada"
       ],
-      investment: "Inversión estimada: Proyectos a partir de $1200 USD",
+      investment: "Inversión estimada: Proyectos a partir de $20000 MXN",
       costNote:
         "El costo final depende del alcance, pantallas, flujos, usuarios e integraciones.",
       guidance:
