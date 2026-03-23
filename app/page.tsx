@@ -9,6 +9,7 @@ type Node = {
   id: string;
   subdomain: string;
   label: string;
+  productName?: string;
   summary: string;
   focus: string[];
   x: number;
@@ -36,7 +37,7 @@ const systemsNodesEn: Node[] = [
   {
     id: "economy",
     subdomain: "data",
-    label: "Economy Data (W.I.P.)",
+    label: "Data (W.I.P.)",
     summary: "Pipelines for ingestion, modeling, and visualization APIs.",
     focus: [
       "Time-series storage + snapshotting",
@@ -49,7 +50,8 @@ const systemsNodesEn: Node[] = [
   {
     id: "game",
     subdomain: "game",
-    label: "Living Dead Beat",
+    label: "Game Engine",
+    productName: "Living Dead Beat",
     summary: "PvE/PvP RPG multiplayer online IO style videogame.",
     focus: [
       "Art on canvas with in-memory projections",
@@ -82,11 +84,11 @@ const systemsNodesEs: Node[] = [
     id: "fintech",
     subdomain: "fintech",
     label: "Fintech (W.I.P.)",
-    summary: "Ledgers, pagos, flujos idempotentes y mensajeria orientada a riesgo.",
+    summary: "Ledgers, pagos, flujos idempotentes y mensajería orientada a riesgo.",
     focus: [
       "Ledgers event-driven con outbox/idempotencia",
-      "Orquestacion de pagos con retries y DLQ",
-      "Routing API gateway/BFF y politica de auth",
+      "Orquestación de pagos con retries y DLQ",
+      "Routing API gateway/BFF y política de auth",
     ],
     x: 50,
     y: 12,
@@ -94,8 +96,8 @@ const systemsNodesEs: Node[] = [
   {
     id: "economy",
     subdomain: "data",
-    label: "Economia Data (W.I.P.)",
-    summary: "Pipelines para ingesta, modelado y APIs de visualizacion.",
+    label: "Data (W.I.P.)",
+    summary: "Pipelines para ingesta, modelado y APIs de visualización.",
     focus: [
       "Almacenamiento time-series + snapshotting",
       "Workers de modelado con backpressure",
@@ -108,12 +110,13 @@ const systemsNodesEs: Node[] = [
     id: "game",
     subdomain: "game",
     label: "Motor de Juego",
-    summary: "Estado por proyecciones, dispatch de eventos y snapshots.",
+    productName: "Living Dead Beat",
+    summary: "Videojuego estilo IO multijugador RPG PvE/PvP.",
     focus: [
       "Arte sobre canvas con proyecciones en memoria",
-      "Core jugable con mecanicas basicas y bots",
+      "Core jugable con mecánicas básicas y bots",
       "Diseño de creeps basado en roles",
-      "Sistema de donaciones con transacciones de dinero real via Paypal(W.I.P.)",
+      "Sistema de donaciones con transacciones de dinero real vía PayPal (W.I.P.)",
       "Log de eventos reproducible",
       "Loop de emit/observe consciente de latencia",
     ],
@@ -127,7 +130,7 @@ const systemsNodesEs: Node[] = [
     summary: "Pruebas de carga, simulaciones distribuidas y observabilidad.",
     focus: [
       "Generadores de escenarios para stress tests",
-      "Experimentos de cache con probes de trazas",
+      "Experimentos de caché con probes de trazas",
       "Ejercicios red-team y chaos switches",
     ],
     x: 50,
@@ -147,15 +150,15 @@ const container = {
 
 const homeContent = {
   en: {
-    heroSubtitle: "Systems engineer portfolio - hybrid tech & art, maps, and resilient systems.",
-    kicker: "NOCTURNE · Pablo Marines · Systems Engineer",
+    heroSubtitle: "Software engineer portfolio - hybrid tech & art, maps, and resilient systems.",
+    kicker: "NOCTURNE · Pablo Marines · Software Engineer senior/Freelance developer · Cancun, Mexico",
     lede:
-      "NOCTURNE is a hybrid tech/art interface with a dark aurora, interactive tech-map, and concise engineering signals. Built to promote my services and showcase my own personal projects, it's designed to surface my development philosophy and expertise in web/app/game development, data engineering and system design.",
-    heroExplore: "Explore systems map",
+      "NOCTURNE is a hybrid tech/art interface with a dark aurora, interactive project map, and concise engineering signals. Built to promote my services as a freelance developer and showcase my own personal projects, it's designed to surface my development philosophy and expertise in web/app/game development, data engineering and system design.",
+    heroExplore: "Explore my projects",
     heroContact: "Contact / socials",
     metaChips: ["Web/App Development", "Game Development", "Data Engineering", "Marketing", "Resilient Systems", "Business Digitalization"],
     languageToggleAria: "Switch portfolio language",
-    mapEyebrow: "My products map.",
+    mapEyebrow: "My projects map.",
     mapTitle: "NOCTURNE core with connected domains",
     mapLead:
       "Central node with Fintech, Economy Data, Game Engine, and Tech Lab edges.",
@@ -178,20 +181,20 @@ const homeContent = {
         body: "Mini case systems and engineering principles surface credibility without walls of text.",
       },
     ],
-    servicesEyebrow: "Landing page services",
-    servicesTitle: "Conversion-first landing page packages for growth-focused teams",
+    servicesEyebrow: "Development services",
+    servicesTitle: "I offer a range of distinct services ideal for clients seeking growth and optimization of their digital presence.",
     servicesLead:
-      "Before jumping into system demos, you can review service packages designed for businesses that need results, including remote and nearshore delivery plus selected on-site work in Cancun and Quintana Roo.",
+      "From landing pages to custom systems and maintenance services, my packages are designed to deliver tangible results, with options for remote and nearshore delivery, as well as select on-site work in Cancun and the Quintana Roo area.",
     servicesBody:
-      "Explore Starter, Pro, and Growth scopes with clear deliverables, timelines, and add-ons for lead capture and automation.",
+      "Explore the different options I have available to suit your needs and start digitizing your business today.",
     servicesPreviewTags: [
       "Senior freelance developer",
       "Accessible landing pages",
       "Nearshore + remote delivery",
       "On-site Cancun, Mexico",
     ],
-    viewPackages: "View packages",
-    quickQuote: "WhatsApp quick quote",
+    viewPackages: "View packages and services",
+    quickQuote: "Email quick quote",
     principlesEyebrow: "Programming principles",
     principlesTitle: "My approach to system design and programming.",
     principles: [
@@ -235,65 +238,65 @@ const homeContent = {
     contactEmail: "Email",
     contactLinkedIn: "LinkedIn",
     contactGitHub: "GitHub",
-    footerMetaOne: "NOCTURNE · Mawgrim · Systems Engineer",
+    footerMetaOne: "NOCTURNE · Pablo Marines · Senior software engineer/Freelance developer · Cancun, Mexico",
     footerMetaTwo: "Built with Next.js, App Router, and custom CSS.",
   },
   es: {
-    heroSubtitle: "Portafolio de ingenieria de sistemas - hibrido tech + arte, mapas y sistemas resilientes.",
-    kicker: "NOCTURNE · Pablo Marines · Ingeniero de Sistemas",
+    heroSubtitle: "Portafolio de ingeniería de software - híbrido tech + arte, mapas y sistemas resilientes.",
+    kicker: "NOCTURNE · Pablo Marines · Ingeniero de Software senior/Desarrollador freelance · Cancún, México",
     lede:
-      "NOCTURNE es una interfaz híbrida tech/arte con una aurora oscura, mapa interactivo de tecnologias y señales de ingeniería concisas. Diseñada para promover mis servicios y mostrar mis propios proyectos personales, está diseñada para mostrar mi filosofía de desarrollo y experiencia en desarrollo web/app/juego, ingeniería de datos y diseño de sistemas.",
-    heroExplore: "Explorar mapa de sistemas",
+      "NOCTURNE es una interfaz híbrida de tecnología y arte con un aurora oscura, mapa interactivo de proyectos y señales de ingeniería concisas. Construida para promover mis servicios como desarrollador freelance y proyectos personales, así como para demostrar mi filosofía de desarrollo y experiencia en desarrollo de web/app/videojuegos, ingeniería de datos y diseño de sistemas.",
+    heroExplore: "Explorar mis proyectos",
     heroContact: "Contacto / redes",
     metaChips: ["Desarrollo de apps y web", "Desarrollo de juegos", "Ingeniería de datos", "Marketing", "Sistemas resilientes", "Digitalización de negocios"],
     languageToggleAria: "Cambiar idioma del portafolio",
-    mapEyebrow: "Mapa de mis productos.",
-    mapTitle: "Nucleo NOCTURNE con dominios conectados",
+    mapEyebrow: "Mapa de mis proyectos.",
+    mapTitle: "Núcleo NOCTURNE con dominios conectados",
     mapLead:
-      "Nodo central con aristas hacia Fintech, Data de Economia, Motor de Juego y Tech Lab.",
+      "Nodo central con aristas hacia Fintech, Data de Economía, Motor de Juego y Tech Lab.",
     mapRingLabel: "Anillo de infraestructura compartida.",
     focusedNode: "Nodo enfocado",
     enterLabel: "Entrar",
-    philosophyEyebrow: "Filosofia base",
-    philosophyTitle: "Como esta planteada la experiencia",
+    philosophyEyebrow: "Filosofía base",
+    philosophyTitle: "Cómo está planteada la experiencia",
     philosophy: [
       {
-        title: "Sistemas sobre paginas",
+        title: "Sistemas sobre páginas",
         body: "Tratar el portafolio como un sistema vivo - mapas, flujos y resiliencia integrados en la experiencia.",
       },
       {
-        title: "Hibrido tech/arte",
-        body: "Canvas oscuro con nodos expresivos y movimiento contenido; primero claridad, despues atmosfera.",
+        title: "Híbrido tech/arte",
+        body: "Canvas oscuro con nodos expresivos y movimiento contenido; primero claridad, después atmósfera.",
       },
       {
         title: "Narrativa de alto valor",
-        body: "Mini casos de sistemas y principios de ingenieria para proyectar credibilidad sin bloques de texto.",
+        body: "Mini casos de sistemas y principios de ingeniería para proyectar credibilidad sin bloques de texto.",
       },
     ],
-    servicesEyebrow: "Servicios de landing pages",
-    servicesTitle: "Paquetes conversion-first para equipos orientados a crecimiento",
+    servicesEyebrow: "Servicios de desarrollo",
+    servicesTitle: "Ofrezco una serie de distintos servicios ideales para clientes que buscan crecimiento y optimización de su presencia digital.",
     servicesLead:
-      "Antes de entrar a los demos de sistemas, puedes revisar paquetes de servicio para negocios que necesitan resultados, incluyendo trabajo remoto, nearshore y presencial en Cancun y Quintana Roo.",
+      "Desde páginas de aterrizaje hasta sistemas personalizados y servicios de mantenimiento, mis paquetes están diseñados para ofrecer resultados tangibles, con opciones de entrega remota y nearshore, además de trabajo presencial seleccionado en Cancún y Quintana Roo.",
     servicesBody:
-      "Explora alcances Starter, Pro y Growth con entregables claros, tiempos definidos y extras para captacion y automatizacion de leads.",
+      "Explora las distintas opciones que tengo disponibles para adaptarse a tus necesidades y comienza la digitalización de tu negocio hoy mismo.",
     servicesPreviewTags: [
       "Desarrollador freelance senior",
       "Landing pages accesibles",
       "Entrega nearshore + remota",
-      "Presencial en Cancun, Mexico",
+      "Presencial en Cancún, México",
     ],
-    viewPackages: "Ver paquetes",
-    quickQuote: "Cotizacion rapida por WhatsApp",
-    principlesEyebrow: "Principios de programacion",
+    viewPackages: "Ver paquetes y servicios",
+    quickQuote: "Cotización rápida por correo",
+    principlesEyebrow: "Principios de programación",
     principlesTitle: "Mi enfoque al diseñar sistemas y programar.",
     principles: [
       "Enfoque en resultados del producto y arquitectura",
-      "Codigo legible e ingenioso dentro de lo necesario",
-      "Iteraciones pequenas con avance visible",
+      "Código legible e ingenioso dentro de lo necesario",
+      "Iteraciones pequeñas con avance visible",
       "Probar y verificar antes de publicar",
-      "Usar IA para potenciar al desarrollador, nunca como piloto automatico",
+      "Usar IA para potenciar al desarrollador, nunca como piloto automático",
     ],
-    techEyebrow: "Stack tecnologico",
+    techEyebrow: "Stack tecnológico",
     techTitle: "Herramientas y disciplinas",
     techStack: [
       {
@@ -317,24 +320,20 @@ const homeContent = {
         ],
       },
       {
-        title: "Practica",
+        title: "Práctica",
         items: ["Modelado C4", "Event storming", "Chaos drills", "Load tests", "Dashboards SLO"],
       },
     ],
     contactEyebrow: "Contacto",
     contactTitle: "Colaboremos",
-    contactLead: "Escribeme para arquitectura de sistemas, simulaciones, fintech o plataformas de datos.",
+    contactLead: "Escríbeme para arquitectura de sistemas, simulaciones, fintech o plataformas de datos.",
     contactEmail: "Email",
     contactLinkedIn: "LinkedIn",
     contactGitHub: "GitHub",
-    footerMetaOne: "NOCTURNE · Mawgrim · Ingeniero de Sistemas",
+    footerMetaOne: "NOCTURNE · Pablo Marines · Ingeniero de Software senior/Desarrollador freelance · Cancún, México",
     footerMetaTwo: "Construido con Next.js, App Router y CSS custom.",
   },
 } as const;
-
-const quickQuoteUrl =
-  process.env.NEXT_PUBLIC_WHATSAPP_URL ??
-  "https://api.whatsapp.com/send?text=Hello%20Nocturne%2C%20I%20want%20a%20quote%20for%20a%20landing%20page%20project.";
 
 export default function Page() {
   const [lang, setLang] = useState<Language>("en");
@@ -346,6 +345,14 @@ export default function Page() {
 
   const copy = homeContent[lang];
   const systemsNodes = lang === "es" ? systemsNodesEs : systemsNodesEn;
+  const quickQuoteUrl = useMemo(() => {
+    const body =
+      lang === "es"
+        ? "Hola, me interesan tus servicios de programacion."
+        : "Hello, I'm interested in your programming services.";
+
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=pabs9230@gmail.com&body=${encodeURIComponent(body)}`;
+  }, [lang]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -475,7 +482,10 @@ export default function Page() {
           </div>
           <div className={styles.kicker}>{copy.kicker}</div>
           <p className={styles.lede}>{copy.lede}</p>
-          <div className={styles.heroActions}>
+          <div className={`${styles.heroActions} ${styles.heroTopActions}`}>
+            <a className={styles.primary} href="/services">
+              {copy.viewPackages}
+            </a>
             <a className={styles.primary} href="#map">
               {copy.heroExplore}
             </a>
@@ -568,7 +578,7 @@ export default function Page() {
                   transition={{ duration: 0.36 }}
                 >
                   <p className={styles.detailKicker}>{copy.focusedNode}</p>
-                  <h3>{displayedNode.label}</h3>
+                  <h3>{displayedNode.productName || displayedNode.label}</h3>
                   <p className={styles.detailText}>{displayedNode.summary}</p>
                   <ul className={styles.focusList}>
                     {displayedNode.focus.map((item) => (

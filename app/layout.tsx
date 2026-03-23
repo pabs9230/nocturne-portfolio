@@ -19,14 +19,14 @@ const jetBrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "NOCTURNE — Systems Engineer Portfolio",
+    default: "NOCTURNE — Software Engineer Portfolio",
     template: "%s | NOCTURNE",
   },
   description:
-    "Senior systems engineer portfolio and landing page services for remote, nearshore, and on-site teams in Cancun, Quintana Roo, and across Mexico.",
+    "Senior software engineer portfolio and landing page services for remote, nearshore, and on-site teams in Cancun, Quintana Roo, and across Mexico.",
   keywords: [
     "senior freelance developer",
-    "systems engineer portfolio",
+    "software engineer portfolio",
     "landing page developer",
     "nearshore developer mexico",
     "remote software engineer",
@@ -42,15 +42,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "NOCTURNE",
-    title: "NOCTURNE — Systems Engineer Portfolio",
+    title: "NOCTURNE — Software Engineer Portfolio",
     description:
       "Hybrid tech/art portfolio plus landing page services for remote, nearshore, and on-site collaborations.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NOCTURNE — Systems Engineer Portfolio",
+    title: "NOCTURNE — Software Engineer Portfolio",
     description:
-      "Senior freelance systems engineer in Cancun, Mexico. Landing page services and architecture-focused portfolio.",
+      "Senior freelance software engineer in Cancun, Mexico. Landing page services and architecture-focused portfolio.",
   },
 };
 

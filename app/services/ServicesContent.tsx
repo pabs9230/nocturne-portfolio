@@ -39,9 +39,10 @@ type LocalizedContent = {
   heroLead: string;
   schemaDescription: string;
   languageToggleAria: string;
-  whatsappLabel: string;
+  contactEmailLabel: string;
   emailLabel: string;
   demosLabel: string;
+  proDemoLabel: string;
   linkedinLabel: string;
   backHomeLabel: string;
   packageSection: {
@@ -52,6 +53,15 @@ type LocalizedContent = {
   extrasSection: {
     eyebrow: string;
     title: string;
+  };
+  appServicesSection: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    capabilities: string[];
+    investment: string;
+    costNote: string;
+    guidance: string;
   };
   coverageSection: {
     eyebrow: string;
@@ -77,10 +87,10 @@ type LocalizedContent = {
 
 type ServicesContentProps = {
   canonicalUrl: string;
-  whatsappUrl: string;
 };
 
 const languageStorageKey = "nocturne-language";
+const extraNotePattern = /^\s*(?:NOTE|NOTA)\s*:/i;
 
 const content: Record<Language, LocalizedContent> = {
   en: {
@@ -91,19 +101,40 @@ const content: Record<Language, LocalizedContent> = {
     schemaDescription:
       "Senior freelance landing page development for conversion-focused teams. Remote, nearshore, and on-site delivery in Cancun, Quintana Roo, and the Yucatan Peninsula.",
     languageToggleAria: "Switch language",
-    whatsappLabel: "WhatsApp quick quote",
+    contactEmailLabel: "Email quick quote",
     emailLabel: "Email inquiry",
     demosLabel: "View system demos",
+    proDemoLabel: "View Landing Pro demo",
     linkedinLabel: "LinkedIn profile",
     backHomeLabel: "Back to Nocturne home",
     packageSection: {
       eyebrow: "Packages",
       title: "Choose the right delivery scope",
-      lead: "All pricing is in USD.",
+      lead: "Package pricing is in USD. Selected add-ons can be quoted in MXN.",
     },
     extrasSection: {
       eyebrow: "Extras",
-      title: "Upsells that strengthen lead operations",
+      title: "Maintenance and enhancement services",
+    },
+    appServicesSection: {
+      eyebrow: "App development services",
+      title: "Web platforms, mobile apps, management tools, automation and more",
+      lead:
+        "Beyond landing pages, I also build both lightweight and robust technology for businesses that need to better organize processes, capture data, or automate operations.",
+      capabilities: [
+        "Mini CRMs",
+        "Dashboards",
+        "Internal portals",
+        "Booking systems",
+        "Advanced forms",
+        "Automation workflows with interface",
+        "PayPal payment systems",
+      ],
+      investment: "Estimated investment: Projects starting at $1200 USD",
+      costNote:
+        "Final cost depends on scope, number of screens, flows, user roles, and integrations.",
+      guidance:
+        "Not sure if you need a landing page or a mini app? I can help you define the best solution based on your objective.",
     },
     coverageSection: {
       eyebrow: "Engagement models",
@@ -120,7 +151,7 @@ const content: Record<Language, LocalizedContent> = {
       title: "Need a landing page that can actually perform?",
       lead:
         "Share your objective, audience, and timeline. I will suggest the package and implementation approach that fits your growth stage.",
-      footer: "Nocturne · Senior systems engineer · Cancun, Mexico",
+      footer: "Pablo Marines · Senior software engineer/Freelance developer · Cancun, Mexico",
     },
     packages: [
       {
@@ -133,7 +164,7 @@ const content: Record<Language, LocalizedContent> = {
           "1 landing page (single-page site)",
           "Responsive design for mobile and desktop",
           "Up to 5 sections",
-          "Floating WhatsApp button",
+          "Floating email quote button",
           "Simple contact form",
           "Social media links",
           "Deployment and publishing",
@@ -180,12 +211,14 @@ const content: Record<Language, LocalizedContent> = {
     extras: [
       {
         name: "Monthly maintenance",
-        price: "$70-$140 USD / month",
+        price: "$70-$250 USD / month",
         details: [
           "Text and image updates",
           "Promotion refreshes",
           "Minor support",
           "Basic health checks",
+          "Periodical backups and performance review",
+          "NOTE: Price range based on expected update frequency and complexity.",
         ],
       },
       {
@@ -207,6 +240,28 @@ const content: Record<Language, LocalizedContent> = {
           "Form to lightweight dashboard",
           "Form to automated follow-up workflow",
           "Webhook + small API integration",
+        ],
+      },
+      {
+        name: "Bilingual page setup",
+        price: "Starting at $140 USD",
+        details: [
+          "English + Spanish page versions",
+          "Copy and section adaptation by language",
+          "Navigation and CTA consistency across languages",
+          "Metadata and SEO structure per language",
+          "NOTE: Base price custom variable by page and number of sections.",
+        ],
+      },
+      {
+        name: "Hosting and domain management",
+        price: "Starting at $165 USD / month",
+        details: [
+          "Full purchase and renewal handling",
+          "Technical setup and ongoing hosting/domain administration",
+          "DNS, SSL, and email routing setup",
+          "Recommended for clients who want zero hosting friction",
+          "NOTE: Base price custom variable based on client needs and project complexity.",
         ],
       },
     ],
@@ -255,31 +310,52 @@ const content: Record<Language, LocalizedContent> = {
   },
   es: {
     kicker: "Servicios Nocturne · Desarrollo de Landing Pages",
-    heroTitle: "Paquetes senior de landing pages para conversion y crecimiento",
+    heroTitle: "Paquetes senior de landing pages para conversión y crecimiento",
     heroLead:
-      "Diseno y desarrollo landing pages de alto rendimiento para negocios y equipos que necesitan resultados medibles, no solo visuales. Los modelos de trabajo incluyen colaboracion remota, nearshore y presencial en Cancun, Quintana Roo y toda la Peninsula de Yucatan.",
+      "Diseño y desarrollo landing pages de alto rendimiento para negocios y equipos que necesitan resultados medibles, no solo visuales. Los modelos de trabajo incluyen colaboración remota, nearshore y presencial en Cancún, Quintana Roo y toda la Península de Yucatán.",
     schemaDescription:
-      "Desarrollo freelance senior de landing pages para equipos enfocados en conversion. Entrega remota, nearshore y presencial en Cancun, Quintana Roo y la Peninsula de Yucatan.",
+      "Desarrollo freelance senior de landing pages para equipos enfocados en conversión. Entrega remota, nearshore y presencial en Cancún, Quintana Roo y la Península de Yucatán.",
     languageToggleAria: "Cambiar idioma",
-    whatsappLabel: "Cotizacion rapida por WhatsApp",
+    contactEmailLabel: "Cotización rápida por correo",
     emailLabel: "Consulta por email",
     demosLabel: "Ver demos del sistema",
+    proDemoLabel: "Ver demo Landing Pro",
     linkedinLabel: "Perfil de LinkedIn",
     backHomeLabel: "Volver al inicio de Nocturne",
     packageSection: {
       eyebrow: "Paquetes",
       title: "Elige el alcance ideal para tu proyecto",
-      lead: "Todos los precios estan en USD.",
+      lead: "Los paquetes y extras están en MXN.",
     },
     extrasSection: {
       eyebrow: "Extras",
-      title: "Upsells para mejorar tu captacion de leads",
+      title: "Servicios de mantenimiento y mejoras",
+    },
+    appServicesSection: {
+      eyebrow: "Desarrollo de apps",
+      title: "Plataformas web, apps móviles, herramientas de gestión, automatización y más",
+      lead:
+        "Además de landing pages, también desarrollo tecnologia tanto ligera como robusta para negocios que necesitan organizar mejor procesos, capturar datos o automatizar operaciones.",
+      capabilities: [
+        "Mini CRMs",
+        "Dashboards",
+        "Portales internos",
+        "Reservas",
+        "Formularios avanzados",
+        "Automatización con interfaz",
+        "Sistemas de pagos con PayPal",
+      ],
+      investment: "Inversión estimada: Proyectos a partir de $1200 USD",
+      costNote:
+        "El costo final depende del alcance, pantallas, flujos, usuarios e integraciones.",
+      guidance:
+        "¿No sabes si necesitas una landing o una mini app? Puedo ayudarte a definir la mejor solución según tu objetivo.",
     },
     coverageSection: {
       eyebrow: "Modelos de trabajo",
-      title: "Colaboracion remota, nearshore y presencial",
+      title: "Colaboración remota, nearshore y presencial",
       lead:
-        "Trabajo con negocios locales en Cancun, equipos regionales en Quintana Roo y clientes internacionales que buscan un desarrollador senior nearshore en Mexico.",
+        "Trabajo con negocios locales en Cancún, equipos regionales en Quintana Roo y clientes internacionales que buscan un desarrollador senior nearshore en México.",
     },
     faqSection: {
       eyebrow: "Preguntas frecuentes",
@@ -287,23 +363,23 @@ const content: Record<Language, LocalizedContent> = {
     },
     ctaSection: {
       eyebrow: "Inicia tu proyecto",
-      title: "Necesitas una landing page que de resultados reales?",
+      title: "¿Necesitas una landing page que dé resultados reales?",
       lead:
-        "Comparte tu objetivo, audiencia y tiempos. Te recomiendo el paquete y el enfoque de implementacion que mejor se adapte a tu etapa de crecimiento.",
-      footer: "Nocturne · Ingeniero senior de sistemas · Cancun, Mexico",
+        "Comparte tu objetivo, audiencia y tiempos. Te recomiendo el paquete y el enfoque de implementación que mejor se adapte a tu etapa de crecimiento.",
+      footer: "Pablo Marines · Ingeniero de software senior/Programador freelance · Cancún, México",
     },
     packages: [
       {
         name: "Landing Starter",
-        price: 280,
+        price: 5000,
         featured: false,
-        timeline: "Entrega en 4-6 dias habiles",
-        summary: "Ideal para negocios que necesitan presencia profesional y una via rapida de contacto.",
+        timeline: "Entrega en 4-6 días hábiles",
+        summary: "Ideal para negocios que necesitan presencia profesional y una vía rápida de contacto.",
         features: [
-          "1 landing page (sitio de una sola pagina)",
-          "Diseno responsive para movil y desktop",
+          "1 landing page (sitio de una sola página)",
+          "Diseño responsive para móvil y desktop",
           "Hasta 5 secciones",
-          "Boton flotante de WhatsApp",
+          "Botón flotante para cotización por correo",
           "Formulario de contacto simple",
           "Links a redes sociales",
           "Publicacion y deploy",
@@ -312,37 +388,37 @@ const content: Record<Language, LocalizedContent> = {
       },
       {
         name: "Landing Pro",
-        price: 510,
+        price: 9000,
         featured: true,
-        timeline: "Entrega en 5-8 dias habiles",
-        summary: "Mejor relacion valor/precio para negocios orientados a conversion y campanas.",
+        timeline: "Entrega en 5-8 días hábiles",
+        summary: "Mejor relación valor/precio para negocios orientados a conversión y campañas.",
         features: [
           "Todo lo del Starter",
-          "Estructura optimizada para conversion",
+          "Estructura optimizada para conversión",
           "Contenido orientado a CTA",
-          "Seccion FAQ",
-          "Google Maps o ubicacion (si aplica)",
+          "Sección FAQ",
+          "Google Maps o ubicación (si aplica)",
           "Formulario mejorado",
-          "SEO basico: title, description, headings",
-          "Configuracion de Google Analytics",
-          "Configuracion de dominio (si ya existe)",
+          "SEO básico: title, description, headings",
+          "Configuración de Google Analytics",
+          "Configuración de dominio (si ya existe)",
           "2 rondas de cambios",
         ],
       },
       {
         name: "Landing Growth",
-        price: 795,
+        price: 14000,
         featured: false,
-        timeline: "Entrega en 5-10 dias habiles",
-        summary: "Para equipos que ejecutan campanas y necesitan mejor tracking, velocidad y calidad de leads.",
+        timeline: "Entrega en 5-10 días hábiles",
+        summary: "Para equipos que ejecutan campañas y necesitan mejor tracking, velocidad y calidad de leads.",
         features: [
           "Todo lo del Pro",
-          "Optimizacion de rendimiento",
-          "Integracion de Meta Pixel o similar",
-          "Seccion de testimonios optimizada",
+          "Optimización de rendimiento",
+          "Integración de Meta Pixel o similar",
+          "Sección de testimonios optimizada",
           "FAQ SEO extendida",
-          "Integracion avanzada de captacion",
-          "30 dias de soporte y ajustes menores",
+          "Integración avanzada de captación",
+          "30 días de soporte y ajustes menores",
           "Entrega prioritaria",
         ],
       },
@@ -350,48 +426,72 @@ const content: Record<Language, LocalizedContent> = {
     extras: [
       {
         name: "Mantenimiento mensual",
-        price: "$70-$140 USD / mes",
+        price: "$1250 - $4500 MXN / mes",
         details: [
-          "Cambios de texto e imagenes",
-          "Actualizacion de promociones",
+          "Cambios de texto e imágenes",
+          "Actualización de promociones",
           "Soporte menor",
-          "Revision basica del sitio",
+          "Revisión básica del sitio",
+          "Respaldo periódico y revisión de rendimiento",
+          "NOTA: Rango de precio basado en frecuencia y complejidad de actualizaciones.",
         ],
       },
       {
         name: "Formulario con notificaciones profesionales",
-        price: "$85-$200 USD",
+        price: "$1500 - $3500 MXN",
         details: [
-          "Flujo de envio por email",
-          "Mensaje de confirmacion al usuario",
+          "Flujo de envío por email",
+          "Mensaje de confirmación al usuario",
           "Guardado opcional de leads",
           "Mejor manejo de prospectos",
         ],
       },
       {
-        name: "Automatizacion simple de leads",
-        price: "$230-$685 USD",
+        name: "Automatización simple de leads",
+        price: "$4100 - $12330 MXN",
         details: [
           "Formulario a email + Google Sheets",
           "Formulario a base de datos",
           "Formulario a dashboard ligero",
-          "Formulario a flujo automatico de seguimiento",
-          "Integracion por webhook + API pequena",
+          "Formulario a flujo automático de seguimiento",
+          "Integración por webhook + API pequeña",
+        ],
+      },
+      {
+        name: "Página bilingüe",
+        price: "Desde $2500 MXN",
+        details: [
+          "Versión completa en inglés y español",
+          "Adaptación de contenido y secciones por idioma",
+          "Navegación y CTA consistentes entre idiomas",
+          "Metadata y estructura SEO por idioma",
+          "NOTA: Precio base personalizado por página y cantidad de secciones.",
+        ],
+      },
+      {
+        name: "Hosting y dominio",
+        price: "Desde $3000 MXN",
+        details: [
+          "Compra y renovación completa del hosting y dominio",
+          "Configuración técnica y administración continua del hosting/dominio",
+          "Configuración de DNS, SSL y correo",
+          "Recomendado para clientes que no quieren lidiar con molestias técnicas",
+          "NOTA: Precio base personalizado variable según necesidades del cliente y complejidad del proyecto.",
         ],
       },
     ],
     modes: [
       {
         title: "Remoto",
-        body: "Flujo de trabajo asincrono, checkpoints semanales y entrega transparente de inicio a lanzamiento.",
+        body: "Flujo de trabajo asíncrono, checkpoints semanales y entrega transparente de inicio a lanzamiento.",
       },
       {
         title: "Nearshore",
-        body: "Ejecucion compatible en zona horaria para equipos de US y LATAM con comunicacion clara.",
+        body: "Ejecución compatible en zona horaria para equipos de US y LATAM con comunicación clara.",
       },
       {
         title: "Presencial",
-        body: "Disponible para proyectos seleccionados en Cancun y zonas cercanas de Quintana Roo y Peninsula de Yucatan.",
+        body: "Disponible para proyectos seleccionados en Cancún y zonas cercanas de Quintana Roo y Península de Yucatán.",
       },
     ],
     seoTags: [
@@ -399,35 +499,35 @@ const content: Record<Language, LocalizedContent> = {
       "Desarrollador de landing pages",
       "Desarrollo nearshore en Mexico",
       "Desarrollador remoto para empresas",
-      "Desarrollo presencial en Cancun",
-      "Desarrollador web en Cancun",
+      "Desarrollo presencial en Cancún",
+      "Desarrollador web en Cancún",
       "Desarrollador web en Quintana Roo",
-      "Ingeniero de software en Peninsula de Yucatan",
-      "Servicios web para negocios en Mexico",
-      "Diseno web accesible",
+      "Ingeniero de software en Península de Yucatán",
+      "Servicios web para negocios en México",
+      "Diseño web accesible",
     ],
     faq: [
       {
-        q: "Trabajas remoto, nearshore y presencial?",
-        a: "Si. Trabajo de forma remota, nearshore con equipos de US y LATAM, y presencial en proyectos seleccionados en Cancun y zonas cercanas de Quintana Roo.",
+        q: "¿Trabajas remoto, nearshore y presencial?",
+        a: "Sí. Trabajo de forma remota, nearshore con equipos de US y LATAM, y presencial en proyectos seleccionados en Cancún y zonas cercanas de Quintana Roo.",
       },
       {
-        q: "Estos paquetes sirven para SEO y campanas de pago?",
-        a: "Si. Pro y Growth incluyen estructura orientada a conversion y practicas SEO base. Growth esta pensado para tracking mas avanzado y mejor rendimiento.",
+        q: "¿Estos paquetes sirven para SEO y campañas de pago?",
+        a: "Sí. Pro y Growth incluyen estructura orientada a conversión y prácticas SEO base. Growth está pensado para tracking más avanzado y mejor rendimiento.",
       },
       {
-        q: "Puedes hacer landing pages bilingues?",
-        a: "Si. Entrego en ingles y espanol, incluyendo estructura, flujo de CTA y estrategia de metadata.",
+        q: "¿Puedes hacer landing pages bilingües?",
+        a: "Sí. Entrego en inglés y español, incluyendo estructura, flujo de CTA y estrategia de metadata.",
       },
       {
-        q: "Construyes landing pages accesibles?",
-        a: "Si. La accesibilidad se integra con estructura semantica, jerarquia clara, navegacion por teclado y buenas practicas de UX.",
+        q: "¿Construyes landing pages accesibles?",
+        a: "Sí. La accesibilidad se integra con estructura semántica, jerarquía clara, navegación por teclado y buenas prácticas de UX.",
       },
     ],
   },
 };
 
-export default function ServicesContent({ canonicalUrl, whatsappUrl }: ServicesContentProps) {
+export default function ServicesContent({ canonicalUrl }: ServicesContentProps) {
   const [lang, setLang] = useState<Language>("en");
   const reduceMotion = useReducedMotion();
 
@@ -452,6 +552,19 @@ export default function ServicesContent({ canonicalUrl, whatsappUrl }: ServicesC
   };
 
   const copy = content[lang];
+  const packageCurrency = lang === "es" ? "MXN" : "USD";
+  const packagePriceFormatter = useMemo(
+    () => new Intl.NumberFormat(lang === "es" ? "es-MX" : "en-US"),
+    [lang],
+  );
+  const quickQuoteEmailUrl = useMemo(() => {
+    const body =
+      lang === "es"
+        ? "Hola, me interesan tus servicios de programacion."
+        : "Hello, I'm interested in your programming services.";
+
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=pabs9230@gmail.com&body=${encodeURIComponent(body)}`;
+  }, [lang]);
 
   const serviceSchema = useMemo(
     () => ({
@@ -488,12 +601,12 @@ export default function ServicesContent({ canonicalUrl, whatsappUrl }: ServicesC
             description: item.summary,
           },
           price: item.price,
-          priceCurrency: "USD",
+          priceCurrency: packageCurrency,
           availability: "https://schema.org/InStock",
         })),
       },
     }),
-    [canonicalUrl, copy],
+    [canonicalUrl, copy, packageCurrency],
   );
 
   return (
@@ -553,19 +666,14 @@ export default function ServicesContent({ canonicalUrl, whatsappUrl }: ServicesC
               <h1 className={styles.heroTitle}>{copy.heroTitle}</h1>
               <p className={styles.heroLead}>{copy.heroLead}</p>
               <div className={styles.heroActions}>
-                <a className={styles.primary} href={whatsappUrl} target="_blank" rel="noreferrer">
-                  {copy.whatsappLabel}
+                <a className={styles.primary} href={quickQuoteEmailUrl} target="_blank" rel="noreferrer">
+                  {copy.contactEmailLabel}
                 </a>
-                <a
-                  className={styles.secondary}
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=pabs9230@gmail.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {copy.emailLabel}
-                </a>
-                <Link className={styles.secondary} href="/#ecosystem">
+                <Link className={styles.primary} href="/#map">
                   {copy.demosLabel}
+                </Link>
+                <Link className={styles.demoProButton} href="/demo/black-lion-muay-thai" target="_blank">
+                  <span className={styles.demoProButtonText}>{copy.proDemoLabel}</span>
                 </Link>
               </div>
             </section>
@@ -582,7 +690,7 @@ export default function ServicesContent({ canonicalUrl, whatsappUrl }: ServicesC
                 {copy.packages.map((item) => (
                   <article key={item.name} className={`${styles.packageCard} ${item.featured ? styles.featured : ""}`}>
                     <p className={styles.packageName}>{item.name}</p>
-                    <p className={styles.price}>${item.price} USD</p>
+                    <p className={styles.price}>${packagePriceFormatter.format(item.price)} {packageCurrency}</p>
                     <p className={styles.timeline}>{item.timeline}</p>
                     <p className={styles.packageSummary}>{item.summary}</p>
                     <ul className={styles.packageList}>
@@ -595,22 +703,51 @@ export default function ServicesContent({ canonicalUrl, whatsappUrl }: ServicesC
               </div>
             </section>
 
-            <section className={styles.section} aria-labelledby="extras-title">
+            <section className={`${styles.section} ${styles.showcaseSection} ${styles.appShowcaseSection}`} aria-labelledby="app-services-title">
+              <div className={styles.sectionHeader}>
+                <p className={styles.eyebrow}>{copy.appServicesSection.eyebrow}</p>
+                <h2 id="app-services-title" className={styles.sectionTitle}>
+                  {copy.appServicesSection.title}
+                </h2>
+                <p className={styles.sectionLead}>{copy.appServicesSection.lead}</p>
+              </div>
+              <div className={`${styles.extrasGrid} ${styles.showcaseGrid}`}>
+                <article className={`${styles.extraCard} ${styles.showcaseCard} ${styles.appCapabilityCard}`}>
+                  <ul>
+                    {copy.appServicesSection.capabilities.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+                <article className={`${styles.extraCard} ${styles.showcaseCard} ${styles.appInvestmentCard}`}>
+                  <p className={styles.extraPrice}>{copy.appServicesSection.investment}</p>
+                  <p>{copy.appServicesSection.costNote}</p>
+                  <p>{copy.appServicesSection.guidance}</p>
+                </article>
+              </div>
+            </section>
+
+            <section className={`${styles.section} ${styles.showcaseSection}`} aria-labelledby="extras-title">
               <div className={styles.sectionHeader}>
                 <p className={styles.eyebrow}>{copy.extrasSection.eyebrow}</p>
                 <h2 id="extras-title" className={styles.sectionTitle}>
                   {copy.extrasSection.title}
                 </h2>
               </div>
-              <div className={styles.extrasGrid}>
+              <div className={`${styles.extrasGrid} ${styles.showcaseGrid}`}>
                 {copy.extras.map((item) => (
-                  <article key={item.name} className={styles.extraCard}>
+                  <article key={item.name} className={`${styles.extraCard} ${styles.showcaseCard}`}>
                     <h3>{item.name}</h3>
                     <p className={styles.extraPrice}>{item.price}</p>
                     <ul>
-                      {item.details.map((detail) => (
-                        <li key={detail}>{detail}</li>
-                      ))}
+                      {item.details.map((detail) => {
+                        const isNote = extraNotePattern.test(detail);
+                        return (
+                          <li key={detail} className={isNote ? styles.extraNote : undefined}>
+                            {detail}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </article>
                 ))}
@@ -664,11 +801,11 @@ export default function ServicesContent({ canonicalUrl, whatsappUrl }: ServicesC
               </h2>
               <p>{copy.ctaSection.lead}</p>
               <div className={styles.heroActions}>
-                <a className={styles.primary} href={whatsappUrl} target="_blank" rel="noreferrer">
-                  {copy.whatsappLabel}
+                <a className={styles.primary} href={quickQuoteEmailUrl} target="_blank" rel="noreferrer">
+                  {copy.contactEmailLabel}
                 </a>
                 <a
-                  className={styles.secondary}
+                  className={styles.primary}
                   href="https://www.linkedin.com/in/pablo-marines-lechuga/"
                   target="_blank"
                   rel="noreferrer"

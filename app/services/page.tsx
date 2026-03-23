@@ -3,9 +3,6 @@ import ServicesContent from "./ServicesContent";
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://nocturne.dev").replace(/\/$/, "");
 const canonicalUrl = `${siteUrl}/services`;
-const whatsappUrl =
-  process.env.NEXT_PUBLIC_WHATSAPP_URL ??
-  "https://api.whatsapp.com/send?text=Hello%20Nocturne%2C%20I%20want%20a%20quote%20for%20a%20landing%20page%20project.";
 
 export const metadata: Metadata = {
   title: "Landing Page Services | Senior Freelance Developer in Cancun, Mexico | Nocturne",
@@ -23,17 +20,17 @@ export const metadata: Metadata = {
     "yucatan peninsula software engineer",
     "on-site web development cancun",
     "desarrollador freelance senior",
-    "desarrollador landing pages cancun",
-    "desarrollador web cancun",
+    "desarrollador landing pages cancún",
+    "desarrollador web cancún",
     "desarrollador web quintana roo",
-    "desarrollo nearshore mexico",
-    "desarrollador remoto mexico",
-    "servicios de landing page mexico",
-    "diseno web accesible cancun",
-    "ingeniero de software cancun",
-    "ingeniero de software peninsula de yucatan",
-    "desarrollo web presencial cancun",
-    "freelancer senior mexico",
+    "desarrollo nearshore méxico",
+    "desarrollador remoto méxico",
+    "servicios de landing page méxico",
+    "diseño web accesible cancún",
+    "ingeniero de software cancún",
+    "ingeniero de software península de yucatán",
+    "desarrollo web presencial cancún",
+    "freelancer senior méxico",
   ],
   alternates: {
     canonical: canonicalUrl,
@@ -68,5 +65,5 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
-  return <ServicesContent canonicalUrl={canonicalUrl} whatsappUrl={whatsappUrl} />;
+  return <ServicesContent canonicalUrl={canonicalUrl} />;
 }
